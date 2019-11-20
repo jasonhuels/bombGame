@@ -1,10 +1,10 @@
 import React from "react";
 
-function Instruction() {
+function Instruction(props) {
 
   return(
     <div>
-      <h1>I am an instruction</h1>
+      <h1>Password is {props.password}</h1>
     </div>
   );
 }

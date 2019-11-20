@@ -7,6 +7,7 @@ import Bomb from './Bomb';
 import Instruction from "./Instruction";
 import Defuse from "./Defuse";
 import Moment from "moment";
+import defusers from '../js/Library.js'
 
 class App extends React.Component {
   constructor(props){
@@ -14,12 +15,14 @@ class App extends React.Component {
     this.state ={
       timerStarted: false,
       bombDefused: false,
-      counter: 5
+      counter: 5,
+      passwordCode: null
     };
     this.startTimer = this.startTimer.bind(this);
   }
-  componentDidMount() {
 
+  componentDidMount() {
+    this.createTaskArray()
   }
 
   startTimer(){
@@ -41,16 +44,30 @@ class App extends React.Component {
     
   }
 
+  createTaskArray() {
+    let taskArray = []
+    taskArray.push(defusers[0].createPass())
+    this.setState({passwordCode: taskArray}) 
+  }
+
   render() {
     return (
       <div className="container">
         <style jsx global>{styles}</style>
         <Home />
+        {console.log("App password state: " + this.state.passwordCode)}
         <Bomb startTimer={this.startTimer} timerStarted={this.state.timerStarted} counter = {this.state.counter}/>
           <Switch>
-              {/* <Route exact path='/' component={Home} /> */}
-              <Route path="/Instruction" component={Instruction} />
-              <Route path="/Defuse" component={Defuse} />
+              <Route 
+              path="/Instruction" 
+              render={(props) => 
+              <Instruction {...props} password={this.state.passwordCode} /> }
+              />
+            <Route
+              path="/Defuse"
+              render={(props) =>
+                <Defuse {...props} password={this.state.passwordCode} />}
+            />
           </Switch>
       </div>
     );

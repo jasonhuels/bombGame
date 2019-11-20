@@ -1,17 +1,10 @@
 import React from "react";
+import defusers from '../js/Library.js'
 
-function Defuse() {
-
-  function checkPassword(input){
-    if(input === "hello"){
-      console.log("You did it!");
-    }
-  }
-
+function Defuse(props) {
   return (
     <div>
-      <h1>I am an Defuser</h1>
-      <form onSubmit={(event)=> {event.preventDefault(); checkPassword(document.getElementById("password").value)}}>
+      <form onSubmit={(event)=> {event.preventDefault(); defusers[0].checkPass((document.getElementById("password").value), props.password)}}>
         <input id="password"/>
 
         <button type="submit">Submit</button>
