@@ -6,7 +6,8 @@ function Home() {
   return (
 
     <div>
-      <p>Home Works</p>
+      <a href="#/Instruction"><button>Instruction</button></a>
+      <a href="#/Defuse"><button>Bomb Console</button></a>
     </div>
     
   );
